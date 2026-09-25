@@ -113,31 +113,24 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
 void IRPAIR(void);
-
 int main(void)
 {
     HAL_Init();
-
     SystemClock_Config();
-
     MX_GPIO_Init();
     MX_USART1_UART_Init();
-
     while (1)
     {
         IRPAIR();
     }
 }
-
 void IRPAIR(void)
 {
     IRSENSOR = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_4);
-
     if (IRSENSOR == 0)
     {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
         HAL_Delay(2000);
-
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
         HAL_Delay(2000);
     }
